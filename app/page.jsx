@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
             Attendance is a simple app to track your attendance.
           </p>
           <div className="flex flex-col items-center justify-center mt-8">
-            <Button onClick={handleLogin} variant="outline" size="lg">
+            {/* <Button onClick={handleLogin} variant="outline" size="lg">
               Login
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

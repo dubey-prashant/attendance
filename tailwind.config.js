@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+// const colors = require("tailwindcss/colors");
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -6,6 +8,7 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
+    "./node_modules/flowbite/**/*.js"
 	],
   theme: {
     container: {
@@ -22,11 +25,11 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
+        primary: { 
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
-        secondary: {
+        secondary: { 
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
@@ -72,5 +75,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+    require("flowbite/plugin")
+  ],
 }
