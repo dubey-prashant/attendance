@@ -1,5 +1,5 @@
 import './globals.css'
-import Providers from './providers'
+import Providers from './Providers'
 import RootLayout from './RootLayout'
 
 export const metadata = {

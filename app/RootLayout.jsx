@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   const { isLoggedIn } = useContext(UserContext)
 
   return (
-    <body className={`${montserrat.className} h-screen flex flex-col `}>
+    <body className={`${montserrat.className} h-screen flex flex-col dark `}>
 
       <Navbar isLoggedIn={isLoggedIn} />
 
@@ -27,8 +27,8 @@ export default function RootLayout({ children }) {
         { "sm:ml-64": isLoggedIn }
       )}>
         {children}
-      </main>
-      {/* <script src="/node_modules/flowbite/dist/flowbite.min.js"></script> */}
+      </main> 
+      
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     </body>
   )
