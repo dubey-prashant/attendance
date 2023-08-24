@@ -1,10 +1,12 @@
-import { UserContextProvider } from "./contexts/user";
+"use client"
+ 
+import { SessionProvider } from 'next-auth/react';
 
  
 export default function Providers({children}) {
-  return ( 
-    <UserContextProvider>
-      {children}
-    </UserContextProvider>    
+  return (  
+      <SessionProvider>
+        {children}
+      </SessionProvider>  
   )
 }
