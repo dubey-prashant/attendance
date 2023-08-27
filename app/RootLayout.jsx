@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { useSession } from 'next-auth/react';
 import Script from 'next/script'
 import { useRouter } from 'next/navigation' 
+import { Toaster } from "@/components/ui/toaster"
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
             </main>
           </>
         } 
+        <Toaster />
       </body>
     </>
   )

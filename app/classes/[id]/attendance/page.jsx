@@ -8,6 +8,7 @@ import axios from '@/lib/axios'
 import { useState, useEffect } from 'react'
 import moment from 'moment' 
 import Loading from '@/components/Loading'
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Page({ params }) {
   const [students, setStudents] = useState([]);
@@ -15,11 +16,15 @@ export default function Page({ params }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const {toast} = useToast()
 
   useEffect(() => {
     fetchStudents();
-    fetchAttendanceData();
   }, []);
+
+  useEffect(() => {
+    fetchAttendanceData();
+  }, [selectedDate]);
 
 
   function fetchStudents() {
@@ -79,6 +84,8 @@ export default function Page({ params }) {
 
       console.log('Attendance submitted');
       setSubmitting(false)
+      toast({title: "Attendance submitted"})
+
     } catch (error) {
       console.error('Error submitting attendance:', error);
       setSubmitting(false)

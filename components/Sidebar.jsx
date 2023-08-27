@@ -33,11 +33,16 @@ const links = [{
   id: 5,
   label: "Settings",
   href: "/settings",
-},
+  },
+  {
+    id: 6,
+    label: "Logout",
+    href: "/api/auth/signout",
+}
 ]
 
 export default function SidebarComp() {
-  const currentRoute = usePathname();
+  let currentRoute = usePathname(); 
 
   return ( 
     <aside

@@ -61,7 +61,9 @@ export default function AddStudent({ setClassData, classId }) {
               required
               rows={4}
             /> */}
-            <Button onClick={addStudent}
+            <Button
+              onClick={addStudent}
+              disabled={loading}
               className="ml-auto"
             >
               {loading ? "Adding..." : "Add Student"}
