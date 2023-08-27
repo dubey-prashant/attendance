@@ -5,7 +5,7 @@ import { DatePicker } from '@/components/ui/datepicker'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table' 
 
-export default function page() { 
+export default function Page() { 
 
   const dummyDta = [
     {

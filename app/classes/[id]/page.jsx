@@ -8,7 +8,7 @@ import Loading from '@/components/Loading'
 import AddStudent from './AddStudent'
 import { Trash } from 'lucide-react'
 
-export default function page({ params }) {
+export default function Page({ params }) {
 
   const [classData, setClassData] = useState()
   const [isLoading, setIsLoading] = useState(false)

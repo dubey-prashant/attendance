@@ -6,7 +6,7 @@ import Loading from '@/components/Loading'
 import ClassCard from '@/components/ClassCard'
 import AddClass from './AddClass'
 
-export default function page() {
+export default function Page() {
 
   const [classes, setClasses] = useState([])
   const [isLoading, setIsLoading] = useState(false) 

@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 import moment from 'moment' 
 import Loading from '@/components/Loading'
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const [students, setStudents] = useState([]);
   const [attendanceData, setAttendanceData] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
