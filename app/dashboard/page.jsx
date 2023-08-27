@@ -19,7 +19,7 @@ export default function Page() {
         {session.user.email}
       </p>
 
-      <Link href="/api/auth/signout" className="text-lg text-red-500 hover:text-red-600">
+      <Link href="/api/auth/signout" className="mt-6 bg-destructive text-destructive-foreground text-lg rounded px-4 py-2">
         Sign out
       </Link>
     </div>
