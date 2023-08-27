@@ -7,7 +7,7 @@ import Sidebar from '@/components/Sidebar'
 import { cn } from '@/lib/utils'
 import { useSession } from 'next-auth/react';
 import Script from 'next/script'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation' 
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -35,7 +35,8 @@ export default function RootLayout({ children }) {
   return (
     <>
       <head>
-        <Script src="/js/theme.js" beforeInteractive />
+        <Script src="/js/theme.js" strategy="beforeInteractive" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" /> 
       </head>
 
       <body className={`${montserrat.className} h-screen flex flex-col dark `}>
@@ -52,14 +53,14 @@ export default function RootLayout({ children }) {
 
             <Sidebar />
 
-            <main className={cn("p-4 h-full overflow-auto  ",
+            <main className={cn("p-4 h-full overflow-auto mt-14 ",
               { "sm:ml-64": isLoggedIn }
             )}>
               {children}
             </main>
           </>
         }
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+        <script src="flowbite/dist/flowbite.min.js" ></script>
       </body>
     </>
   )

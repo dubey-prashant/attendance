@@ -1,9 +1,17 @@
 "use client"
 
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 const links = [{
+  id: 12,
+  label: "Dashboard",
+  href: "/dashboard",
+}, {
   id: 1,
-  label: "Students",
-  href: "/students",
+  label: "Classes",
+  href: "/classes",
 },
 {
   id: 2,
@@ -28,8 +36,10 @@ const links = [{
 },
 ]
 
-export default function Sidebar() {
-  return (
+export default function SidebarComp() {
+  const currentRoute = usePathname();
+
+  return ( 
     <aside
       id="logo-sidebar"
       className="fixed top-0 left-0 z-30 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -40,9 +50,10 @@ export default function Sidebar() {
 
           {links.map((link) => (
             <li key={link.id}>
-              <a
+              <Link
                 href={link.href}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={cn("flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group",
+                { "bg-gray-100 dark:bg-gray-700": currentRoute === link.href })}
               >
                 <svg
                   className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -55,7 +66,7 @@ export default function Sidebar() {
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
                 <span className="ml-3">{link.label}</span>
-              </a>
+              </Link>
             </li>
           ))}
 

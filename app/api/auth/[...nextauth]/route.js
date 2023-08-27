@@ -5,9 +5,8 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import { clientPromise } from "@/lib/mongodb"
 
 export const authOptions = {
-  // adapter: MongoDBAdapter(clientPromise),
-  secret: process.env.NextAuth_SECRET,
-  // Configure one or more authentication providers
+  adapter: MongoDBAdapter(clientPromise),
+  secret: process.env.NextAuth_SECRET, 
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_APP_CLIENT_ID,
@@ -21,4 +20,5 @@ export const authOptions = {
 } 
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

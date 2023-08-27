@@ -10,7 +10,7 @@ const kellyslab = Kelly_Slab({
 
 export default function Navbar() {
   return (
-    <nav className="relative top-0 z-40 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <nav className="fixed top-0 z-40 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
@@ -37,7 +37,7 @@ export default function Navbar() {
               </svg>
             </button>
             <a href="" className={`${kellyslab.className}  flex ml-2 md:mr-24`}>
-              <span className={`text-[#3651bf] self-center text-xl sm:text-2xl whitespace-nowrap `}>
+              <span className={`text-[#3651bf] self-center text-3xl font-bold whitespace-nowrap `}>
                 Sailee College
               </span>
             </a>
