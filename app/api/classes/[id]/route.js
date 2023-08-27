@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth/next'
 import '@/lib/mongodb'
-import Class from '../model'
+import {Class, Student } from '../../models'
 
+// GET a class: /api/classes/[id]
 export async function GET(req, { params }) {
   const session = await getServerSession(authOptions)
 
@@ -11,7 +12,7 @@ export async function GET(req, { params }) {
     return NextResponse.redirect(new URL('/api/auth/signin', req.url))
 
   try {
-    const data = await Class.findById(params.id)
+    const data = await Class.findById(params.id).populate('students')
 
     return NextResponse.json({ data })
 
@@ -22,19 +23,26 @@ export async function GET(req, { params }) {
 
 }
 
+// UPDATE a class: /api/classes/[id]
 export async function PATCH(req, { params }) {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user)
-    return NextResponse.redirect(new URL('/api/auth/signin', req.url))
-
-  const reqBody = await req.json()
+    return NextResponse.redirect(new URL('/api/auth/signin', req.url)) 
 
   try { 
 
-    const newClass = await Class.findOneAndUpdate({ _id: params.id }, reqBody, { new: true })
+    const updatedClass = await Class.findOneAndUpdate(
+      { _id: params.id },
+      reqBody,
+      { new: true }
+    ).populate('students');
 
-    return NextResponse.json({ message: 'Class Updated ', data: newClass })
+    if (!updatedClass) {
+      return NextResponse.json({ error: 'Class not found' });
+    }   
+
+    return NextResponse.json({ message: 'Class Updated ', data: updatedClass })
 
   } catch (error) {
     console.log("error updating class ", error)
@@ -43,6 +51,7 @@ export async function PATCH(req, { params }) {
 
 }
 
+// DELETE a class: /api/classes/[id]
 export async function DELETE(req, { params }) {
   const session = await getServerSession(authOptions)
 

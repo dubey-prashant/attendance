@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import '@/lib/mongodb'
-import Class from './model'
+import {Class} from '../models'
 import { authOptions } from '../auth/[...nextauth]/route'
 
+// GET all classes: /api/classes
 export async function GET(req) {
   const session = await getServerSession(authOptions)
 
@@ -22,6 +23,7 @@ export async function GET(req) {
 
 }
 
+// CREATE a new class: /api/classes
 export async function POST(req) {
   const session = await getServerSession(authOptions)
 

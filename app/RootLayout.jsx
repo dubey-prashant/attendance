@@ -21,8 +21,7 @@ export default function RootLayout({ children }) {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    console.log("callllllllleeedddd " + status)
+  useEffect(() => { 
     if (status === 'unauthenticated')
       router.push('/api/auth/signin');
     if (status === 'authenticated' && session?.user?.email) {
@@ -35,7 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <>
       <head>
-        <Script src="/js/theme.js" strategy="beforeInteractive" />
+        {/* <Script src="/js/theme.js" strategy="beforeInteractive" /> */}
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" /> 
       </head>
 
@@ -53,14 +52,13 @@ export default function RootLayout({ children }) {
 
             <Sidebar />
 
-            <main className={cn("p-4 h-full overflow-auto mt-14 ",
+            <main className={cn("p-4 h-full mt-14 ",
               { "sm:ml-64": isLoggedIn }
             )}>
               {children}
             </main>
           </>
-        }
-        <script src="flowbite/dist/flowbite.min.js" ></script>
+        } 
       </body>
     </>
   )
