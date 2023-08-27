@@ -9,21 +9,7 @@ import AddClass from './AddClass'
 export default function page() {
 
   const [classes, setClasses] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
-  function createClass({ name, description }) {
-    axios.post('/api/classes', {
-      name,
-      description
-    })
-      .then((data) => {
-        const newClass = data.data.data
-        setClasses([...classes, newClass])
-      })
-      .catch((error) => {
-        console.log("error creating classes ", error)
-      })
-  }
+  const [isLoading, setIsLoading] = useState(false) 
 
   function deleteClass(id) {
     console.log("called delete class ")
@@ -50,8 +36,7 @@ export default function page() {
         console.log("error fetching classes ", error)
         setIsLoading(false)
       })
-  }, [])
-
+  }, []) 
 
   return (
     isLoading ?
@@ -63,7 +48,10 @@ export default function page() {
             Classes
           </h1>
 
-          <AddClass createClass={createClass} />
+          <AddClass
+            classes={classes}
+            setClasses={setClasses}
+          />
         </div>
 
 

@@ -27,6 +27,7 @@
     "eslint-config-next": "13.4.16",
     "flowbite": "^1.8.1",
     "lucide-react": "^0.268.0",
+    "moment": "^2.29.4",
     "mongodb": "^5.8.1",
     "mongoose": "^7.4.4",
     "next": "13.4.16",

@@ -12,7 +12,7 @@ export async function GET(req, { params }) {
     return NextResponse.redirect(new URL('/api/auth/signin', req.url))
 
   try {
-    const data = await Class.findById(params.id).populate('students')
+    const data = await Class.findById(params.class_id).populate('students')
 
     return NextResponse.json({ data })
 
@@ -33,7 +33,7 @@ export async function PATCH(req, { params }) {
   try { 
 
     const updatedClass = await Class.findOneAndUpdate(
-      { _id: params.id },
+      { _id: params.class_id },
       reqBody,
       { new: true }
     ).populate('students');
@@ -60,7 +60,7 @@ export async function DELETE(req, { params }) {
 
   try {
 
-    const deletedClass = await Class.findByIdAndDelete(params.id)
+    const deletedClass = await Class.findByIdAndDelete(params.class_id)
 
     return NextResponse.json({ message: 'Class deleted', data: deletedClass })
 

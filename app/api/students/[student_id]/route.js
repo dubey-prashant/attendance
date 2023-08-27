@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import '@/lib/mongodb'
-import { Class, Student } from '../../../../models'
-import { authOptions } from '../../../../auth/[...nextauth]/route'
+import { Class, Student } from '../../models'
+import { authOptions } from '../../auth/[...nextauth]/route'
 
-// GET a student: /api/classes/[id]/students/[student_id]
+// GET a student: /api/students/[student_id]
 export async function GET(req, { params }) {
   const session = await getServerSession(authOptions)
 
@@ -23,7 +23,7 @@ export async function GET(req, { params }) {
 
 }
 
-// UPDATE a student: /api/classes/[id]/students/[student_id]
+// UPDATE a student: /api/students/[student_id]
 export async function PATCH(req, { params }) {
   const session = await getServerSession(authOptions)
 
@@ -53,12 +53,14 @@ export async function PATCH(req, { params }) {
 
 }
 
-// DELETE a student: /api/classes/[id]/students/[student_id]
+// DELETE a student: /api/students/[student_id]
 export async function DELETE(req, { params }) {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user)
-    return NextResponse.redirect(new URL('/api/auth/signin', req.url))
+    return NextResponse.redirect(new URL('/api/auth/signin', req.url)) 
+  
+  const classId = req.nextUrl.searchParams.get('classId') 
 
   try {
 
@@ -69,7 +71,7 @@ export async function DELETE(req, { params }) {
     }
 
     const updatedClass = await Class.findOneAndUpdate(
-      { _id: params.id },
+      { _id: classId },
       { $pull: { students: params.student_id } },
       { new: true }
     ).populate('students');

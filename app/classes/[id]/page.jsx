@@ -2,7 +2,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
-import axios from 'axios'
+import axios from '@/lib/axios'
 import { useEffect, useState } from 'react'
 import Loading from '@/components/Loading'
 import AddStudent from './AddStudent'
@@ -13,30 +13,15 @@ export default function page({ params }) {
   const [classData, setClassData] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
-  // add student to class
-  function addStudent({ name }) {
-    axios.post(`/api/classes/${params.id}/students`, {
-      name
-    }).then((data) => {
-      const newClassData = data.data.data
-      setClassData(newClassData)
-    }
-    ).catch((error) => {
-      console.log("error adding student ", error)
-    }
-    )
-  }
-
   // remove student from class 
   function removeStudent(studentId) {
-    console.log("called remove student ", studentId)
-    axios.delete(`/api/classes/${params.id}/students/${studentId}`)
+    axios.delete(`/api/students/${studentId}?classId=${params.id}`)
       .then((data) => {
         const newClassData = data.data.data
         setClassData(newClassData)
       }
       ).catch((error) => {
-        console.log("error adding student ", error)
+        console.log("error removing student ", error)
       }
       )
   }
@@ -69,7 +54,7 @@ export default function page({ params }) {
           <div className="  flex justify-between mb-4 ">
             <h2 className="text-xl">{classData?.name}</h2>
 
-            <AddStudent addStudent={addStudent} />
+            <AddStudent setClassData={setClassData} classId={ params.id} />
           </div>
           <Table>
             <TableHeader>

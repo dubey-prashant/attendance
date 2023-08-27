@@ -1,24 +1,42 @@
 "use client"
- 
-import {  useState } from 'react'
+
+import { useState } from 'react'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea' 
+import { Textarea } from '@/components/ui/textarea'
 import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import axios from '@/lib/axios'
 
 
-export default function AddStudent({ addStudent }) {
+export default function AddStudent({ setClassData, classId }) {
 
   const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
   const [image, setImage] = useState("")
   const [loading, setLoading] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
 
+  // add student to class
+  function addStudent() {
+    setLoading(true)
+    axios.post(`/api/students?classId=${classId}`, {
+      name
+    }).then((data) => {
+      const newClassData = data.data.data
+      setClassData(newClassData)
+      setLoading(false)
+      setDialogOpen(false)
+    }
+    ).catch((error) => {
+      console.log("error adding student ", error)
+      setLoading(false)
+    }
+    )
+  }
+
   return (
     <Dialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}>
+      open={dialogOpen}
+      onOpenChange={setDialogOpen}>
       <DialogTrigger asChild >
         <Button variant="outline" >
           Add Student
@@ -43,11 +61,11 @@ export default function AddStudent({ addStudent }) {
               required
               rows={4}
             /> */}
-            <Button onClick={() => {
-              addStudent({ name })
-              setDialogOpen(false)}}
+            <Button onClick={addStudent}
               className="ml-auto"
-            >Create Class</Button>
+            >
+              {loading ? "Adding..." : "Add Student"}
+            </Button>
           </div>
         </div>
       </DialogContent>
