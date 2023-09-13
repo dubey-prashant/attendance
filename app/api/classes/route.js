@@ -9,10 +9,10 @@ export async function GET(req) {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user)
-    return NextResponse.redirect(new URL('/api/auth/signin', req.url))
- 
+    return NextResponse.redirect(new URL('/api/auth/signin', req.url)) 
+  
   try {
-    const data = await Class.find({})
+    const data = await Class.find({createdBy: session?.user?.id})
 
     return NextResponse.json({ data })
 
@@ -34,7 +34,10 @@ export async function POST(req) {
 
   try {
     
-    const newClass = await Class.create(reqBody) 
+    const newClass = await Class.create({
+      ...reqBody,
+      createdBy: session?.user?.id
+    }) 
 
     return NextResponse.json({ message: 'Class created', data: newClass })
 

@@ -19,32 +19,32 @@ const links = [{
   href: "/attendance",
 },
 
+// {
+//   id: 3,
+//   label: "Circulars",
+//   href: "/circulars",
+// },
+// {
+//   id: 4,
+//   label: "Academic Calender",
+//   href: "/academic-calender",
+// },
+// {
+//   id: 5,
+//   label: "Settings",
+//   href: "/settings",
+// },
 {
-  id: 3,
-  label: "Circulars",
-  href: "/circulars",
-},
-{
-  id: 4,
-  label: "Academic Calender",
-  href: "/academic-calender",
-},
-{
-  id: 5,
-  label: "Settings",
-  href: "/settings",
-  },
-  {
-    id: 6,
-    label: "Logout",
-    href: "/api/auth/signout",
+  id: 6,
+  label: "Logout",
+  href: "/api/auth/signout",
 }
 ]
 
 export default function SidebarComp() {
-  let currentRoute = usePathname(); 
+  let currentRoute = usePathname();
 
-  return ( 
+  return (
     <aside
       id="logo-sidebar"
       className="fixed top-0 left-0 z-30 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -58,7 +58,7 @@ export default function SidebarComp() {
               <Link
                 href={link.href}
                 className={cn("flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group",
-                { "bg-gray-100 dark:bg-gray-700": currentRoute === link.href })}
+                  { "bg-gray-100 dark:bg-gray-700": currentRoute === link.href })}
               >
                 <svg
                   className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
